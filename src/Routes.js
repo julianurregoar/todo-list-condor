@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Home, Tasks, Sign } from './views';
+import { Home, Tasks, Signup, Login, Team } from './views';
 import { Navbar } from './components';
 
 const Routes = () => {
@@ -8,15 +8,10 @@ const Routes = () => {
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route
-          path="/signup"
-          render={(props) => <Sign {...props} title="Signup" />}
-        />
-        <Route
-          path="/login"
-          render={(props) => <Sign {...props} title="Login" />}
-        />
+        <Route path="/signup" render={(props) => <Signup {...props} />} />
+        <Route path="/login" render={(props) => <Login {...props} />} />
         <Route path="/tasks" render={(props) => <Tasks {...props} />} />
+        <Route path="/team" render={(props) => <Team {...props} />} />
         <Route path="/" render={(props) => <Home {...props} />} />
       </Switch>
     </BrowserRouter>
