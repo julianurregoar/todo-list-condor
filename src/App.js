@@ -1,20 +1,15 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import Routes from './Routes';
+
+const history = createBrowserHistory();
 
 const App = () => {
-  // const [state, setState] = useState({ users: null, tasks: null });
-
-  // useEffect(() => {
-  //   server.get('/api/task').then((res) => {
-  //     setState({ ...state, tasks: res.data });
-  //   });
-  // }, []);
-
-  // console.log(state);
-
   return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
+    <Router history={history}>
+      <Routes />
+    </Router>
   );
 };
 
