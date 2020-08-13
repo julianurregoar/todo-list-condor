@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import { signFomrSchema } from '../../utils/formikSchemas';
 import { SignForm } from '../../components';
+import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
+  const { login } = useContext(UserContext);
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     validationSchema: signFomrSchema,
-    onSubmit: async (values) => {
-      console.log('login', values);
+    onSubmit: (values) => {
+      login(values);
     },
   });
 
