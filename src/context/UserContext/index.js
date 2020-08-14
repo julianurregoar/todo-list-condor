@@ -17,7 +17,7 @@ const UserProvider = (props) => {
 
   const getCurrentUser = async () => {
     try {
-      const res = await server.get('/api/user/current', config);
+      const res = await server.get('/api/user', config);
       dispatch({ type: 'GET_CURRENT_USER', payload: res.data });
     } catch (error) {
       console.log(error);

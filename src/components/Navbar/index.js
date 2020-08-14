@@ -19,23 +19,35 @@ const Navbar = () => {
         {!user ? (
           <Fragment>
             <Link to="/login">
-              <p className="text-lg py-1 px-2 text-white hover:text-orange-500">
+              <p className="text-lg py-1 px-4 text-white hover:text-orange-500">
                 Login
               </p>
             </Link>
             <Link to="/signup">
-              <p className="font-bold text-lg py-1 px-2 text-white hover:text-orange-500">
+              <p className="font-bold text-lg py-1 px-4 text-white hover:text-orange-500">
                 Signup
               </p>
             </Link>
           </Fragment>
         ) : (
-          <button
-            onClick={logout}
-            className="font-bold text-lg py-1 px-2 text-white hover:text-orange-500 border-none"
-          >
-            Logout
-          </button>
+          <Fragment>
+            <Link to="/tasks">
+              <p className="text-lg py-1 px-4 text-white hover:text-orange-500">
+                Tasks
+              </p>
+            </Link>
+            <Link to="/team">
+              <p className="text-lg py-1 px-4 text-white hover:text-orange-500">
+                Team
+              </p>
+            </Link>
+            <button
+              onClick={logout}
+              className="font-bold text-lg py-1 px-4 text-white hover:text-orange-500 border-none"
+            >
+              Logout
+            </button>
+          </Fragment>
         )}
       </div>
     </div>

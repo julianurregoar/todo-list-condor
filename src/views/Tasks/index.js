@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { TaskContext } from '../../context/TaskContext';
+import { TaskCard } from '../../components';
 
 const Tasks = () => {
   const { tasks, getAllTasks, addTask } = useContext(TaskContext);
@@ -75,7 +76,7 @@ const Tasks = () => {
       )}
       <div className="mt-6">
         {tasks.map((task) => (
-          <p key={task._id}>{task.title}</p>
+          <TaskCard task={task} key={task._id} />
         ))}
       </div>
     </div>
