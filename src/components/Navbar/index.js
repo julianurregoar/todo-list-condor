@@ -8,8 +8,8 @@ const Navbar = () => {
   return (
     <div className="mx-auto h-auto w-full flex px-4 pt-4 absolute">
       <div className="w-1/2 flex">
-        <Link to="/">
-          <h1 className="font-bold text-3xl text-white mx-2">
+        <Link to={user ? '/tasks' : '/'}>
+          <h1 className="font-bold text-3xl text-white">
             Yah
             <span className="text-orange-500">.</span>
           </h1>

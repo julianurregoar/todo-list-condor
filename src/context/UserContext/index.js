@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { server } from '../../utils/axios';
+import { server, config } from '../../utils/axios';
 import { userReducer } from '../../reducer/userReducer';
 
 const UserContext = createContext({
@@ -7,12 +7,22 @@ const UserContext = createContext({
   signup: (body) => {},
   login: (body) => {},
   logout: () => {},
+  getCurrentUser: () => {},
 });
 
 const UserProvider = (props) => {
   const [state, dispatch] = useReducer(userReducer, {
     user: null,
   });
+
+  const getCurrentUser = async () => {
+    try {
+      const res = await server.get('/api/user/current', config);
+      dispatch({ type: 'GET_CURRENT_USER', payload: res.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const signup = async (body) => {
     try {
@@ -44,6 +54,7 @@ const UserProvider = (props) => {
         signup,
         login,
         logout,
+        getCurrentUser,
       }}
     >
       {props.children}

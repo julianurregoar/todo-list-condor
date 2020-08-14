@@ -6,6 +6,10 @@ export const userReducer = (state, { type, payload }) => {
       return {
         user: payload.user,
       };
+    case 'GET_CURRENT_USER':
+      return {
+        user: payload,
+      };
     case 'LOGOUT':
       localStorage.removeItem('token');
       return {

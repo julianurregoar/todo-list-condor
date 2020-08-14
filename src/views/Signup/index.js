@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { signFomrSchema } from '../../utils/formikSchemas';
 import { SignForm } from '../../components';
 import { UserContext } from '../../context/UserContext';
 
 const Signup = () => {
-  const { signup } = useContext(UserContext);
+  const { user, signup } = useContext(UserContext);
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       username: '',
@@ -16,6 +17,10 @@ const Signup = () => {
       signup(values);
     },
   });
+
+  if (user) {
+    return <Redirect push to="/tasks" />;
+  }
 
   return (
     <SignForm
