@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UserCard } from '../../components';
-import { server } from '../../utils/axios';
+import { UserContext } from '../../context/UserContext';
 
 const Team = () => {
-  const [users, setUsers] = useState(null);
+  const { allUsers, getAllUsers } = useContext(UserContext);
 
   useEffect(() => {
-    server.get('/api/user/all').then((res) => {
-      setUsers(res.data);
-    });
+    getAllUsers();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -17,7 +16,8 @@ const Team = () => {
         Team
       </h1>
       <div className="mt-6">
-        {users && users.map((user) => <UserCard user={user} key={user._id} />)}
+        {allUsers &&
+          allUsers.map((user) => <UserCard user={user} key={user._id} />)}
       </div>
     </div>
   );

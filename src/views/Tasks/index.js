@@ -1,30 +1,12 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useFormik } from 'formik';
+import React, { useContext, useState, useEffect } from 'react';
 import { TaskContext } from '../../context/TaskContext';
-import { TaskCard } from '../../components';
+import { UserContext } from '../../context/UserContext';
+import { TaskCard, TaskInput } from '../../components';
 
 const Tasks = () => {
-  const { tasks, getAllTasks, addTask } = useContext(TaskContext);
+  const { tasks, getAllTasks, addTask, deleteTask } = useContext(TaskContext);
+  const { allUsers } = useContext(UserContext);
   const [addTaskOpen, setAddTaskOpen] = useState(false);
-  const inputRef = useRef();
-
-  const { handleSubmit, handleChange, values, resetForm } = useFormik({
-    initialValues: {
-      title: '',
-    },
-    // validationSchema: signFomrSchema,
-    onSubmit: (values) => {
-      values.userId = '5f35c887ff0384183f8d8011';
-      addTask(values);
-      resetForm();
-    },
-  });
-
-  useEffect(() => {
-    if (addTaskOpen) {
-      inputRef.current.focus();
-    }
-  }, [addTaskOpen]);
 
   useEffect(() => {
     getAllTasks();
@@ -44,39 +26,21 @@ const Tasks = () => {
           Add task
         </button>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-2">
-            <input
-              ref={inputRef}
-              type="text"
-              id="title"
-              onChange={handleChange}
-              value={values.title}
-              className="w-full bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-1 px-2 appearance-none leading-normal"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="font-bold text-lg bg-orange-500 hover:bg-orange-600 text-white py-1 px-2 rounded mt-2"
-          >
-            Add task
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setAddTaskOpen(false);
-              resetForm();
-            }}
-            className="text-lg text-white py-1 px-2 mt-2 ml-2 hover:text-orange-500"
-          >
-            Cancel
-          </button>
-        </form>
+        <TaskInput
+          title={''}
+          taskId={null}
+          action={addTask}
+          setIsEdit={setAddTaskOpen}
+        />
       )}
       <div className="mt-6">
         {tasks.map((task) => (
-          <TaskCard task={task} key={task._id} />
+          <TaskCard
+            key={task._id}
+            task={task}
+            allUsers={allUsers}
+            handleDelete={deleteTask}
+          />
         ))}
       </div>
     </div>

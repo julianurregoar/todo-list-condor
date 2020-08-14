@@ -5,10 +5,11 @@ import { Navbar } from './components';
 import { UserContext } from './context/UserContext';
 
 const Routes = () => {
-  const { user, getCurrentUser } = useContext(UserContext);
+  const { user, getCurrentUser, getAllUsers } = useContext(UserContext);
 
   useEffect(() => {
     if (!user) getCurrentUser();
+    getAllUsers();
     // eslint-disable-next-line
   }, []);
 
