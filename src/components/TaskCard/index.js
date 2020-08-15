@@ -44,7 +44,9 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
       <div className="flex items-center">
         {!isEdit ? (
           <div className="w-full">
-            <p className="text-xl p-2 text-white font-semibold">{task.title}</p>
+            <p className="text-2xl p-2 text-white font-semibold">
+              {task.title}
+            </p>
           </div>
         ) : (
           <TaskInput
@@ -77,8 +79,8 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
         ) : null}
       </div>
 
-      <div className="flex items-center">
-        <div className="w-1/6">
+      <div className="lg:flex items-center">
+        <div className="w-full lg:w-1/6">
           <div className="inline-block relative w-full">
             <form>
               <select
@@ -112,15 +114,16 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
             </form>
           </div>
         </div>
-        <div className="w-5/6">
-          <div className="inline-block">
-            <p className="text-white text-lg mx-2">Members:</p>
+
+        <div className="w-full lg:w-5/6">
+          <div className="lg:inline-block">
+            <p className="text-white text-lg lg:mx-2">Members:</p>
           </div>
 
-          <div className="inline-block mr-1">
+          <div className="lg:inline-block mr-1">
             {task.assignedUsers.map((assignedUserId) => (
               <div
-                className="bg-teal-500 rounded-full inline-block px-2 mx-1"
+                className="bg-teal-500 rounded-full inline-block px-2  mr-1 lg:mx-1"
                 key={assignedUserId}
               >
                 <button
@@ -140,7 +143,7 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
             ))}
           </div>
 
-          <div className="inline-block">
+          <div className="inline-block mt-2 lg:mt-0">
             <form>
               <select
                 name="assignedUsers"
