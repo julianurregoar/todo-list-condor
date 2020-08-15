@@ -6,7 +6,7 @@ Change the name of the file **.env.local.example** to **.env.local** in order to
 
 ## Dependencies
 
-Run in a terminal **yarn install** to install all the dependencies needed.
+Browse to this project directory and run in a terminal **yarn install** to install all the dependencies needed.
 
 ## Available Scripts
 

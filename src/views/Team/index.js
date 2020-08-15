@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { UserCard } from '../../components';
 import { UserContext } from '../../context/UserContext';
 
@@ -9,6 +10,11 @@ const Team = () => {
     getAllUsers();
     // eslint-disable-next-line
   }, []);
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return <Redirect push to="/" />;
+  }
 
   return (
     <div className="min-h-screen bg-teal-500 px-4 lg:px-40">

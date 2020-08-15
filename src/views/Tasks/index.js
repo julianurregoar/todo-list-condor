@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
@@ -28,6 +29,11 @@ const Tasks = () => {
     getAllUsers();
     // eslint-disable-next-line
   }, []);
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return <Redirect push to="/" />;
+  }
 
   return (
     <div className="min-h-screen bg-teal-500 px-4 lg:px-40">
@@ -102,6 +108,7 @@ const Tasks = () => {
               task={task}
               allUsers={allUsers}
               handleDelete={deleteTask}
+              isSearch={isSearch}
             />
           ))
         )}
