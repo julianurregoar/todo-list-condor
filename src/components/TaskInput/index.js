@@ -13,7 +13,7 @@ const TaskInput = ({
 }) => {
   const inputRef = useRef();
 
-  const { handleSubmit, handleChange, values } = useFormik({
+  const { handleSubmit, handleChange, values, resetForm } = useFormik({
     initialValues: {
       title: title,
     },
@@ -26,6 +26,9 @@ const TaskInput = ({
       }
       if (isEdit) {
         setIsEdit(false);
+      }
+      if (!isSearch) {
+        resetForm();
       }
     },
   });
