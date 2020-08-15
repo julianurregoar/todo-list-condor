@@ -33,14 +33,14 @@ const TaskInput = ({
     },
   });
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const handleClearSearch = () => {
     clearSearch();
     setIsSearch(false);
   };
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
 
   return (
     <div className="w-full">

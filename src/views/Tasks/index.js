@@ -19,12 +19,13 @@ const Tasks = () => {
     searchTaskByTitle,
     clearSearch,
   } = useContext(TaskContext);
-  const { allUsers } = useContext(UserContext);
+  const { allUsers, getAllUsers } = useContext(UserContext);
   const [openInput, setOpenInput] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
 
   useEffect(() => {
     getAllTasks();
+    getAllUsers();
     // eslint-disable-next-line
   }, []);
 

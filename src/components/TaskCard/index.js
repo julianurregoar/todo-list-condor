@@ -8,6 +8,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { TaskContext } from '../../context/TaskContext';
 import TaskInput from '../TaskInput';
+import getUsernameFromUserId from '../../utils/getUsernameFromUserId';
+import isUserAssigned from '../../utils/isUserAssigned';
 
 const TaskCard = ({ task, allUsers, handleDelete }) => {
   const { editTask, assignUser, unassignUser } = useContext(TaskContext);
@@ -23,20 +25,6 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
 
   const handleUnassignUser = (taskId, userId) => {
     unassignUser(taskId, { userId });
-  };
-
-  const getUsernameFromUserId = (id, allUsers) => {
-    const user = allUsers.find((user) => user._id === id);
-    return user.username;
-  };
-
-  const isAssigned = (id) => {
-    const result = task.assignedUsers.find((user) => user === id);
-    if (result) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   return (
@@ -116,14 +104,15 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
         </div>
 
         <div className="w-full lg:w-5/6">
-          <div className="lg:inline-block">
-            <p className="text-white text-lg lg:mx-2">Members:</p>
+          <div className="inline-block">
+            <p className="text-white text-lg mr-1 mt-1 lg:mt-0 lg:mx-2 lg:mr-0">
+              Members:
+            </p>
           </div>
-
-          <div className="lg:inline-block mr-1">
+          <div className="inline-block">
             {task.assignedUsers.map((assignedUserId) => (
               <div
-                className="bg-teal-500 rounded-full inline-block px-2  mr-1 lg:mx-1"
+                className="bg-teal-500 rounded-full inline-block px-2 mx-1"
                 key={assignedUserId}
               >
                 <button
@@ -149,7 +138,7 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
                 name="assignedUsers"
                 id="assignedUsers"
                 value="choose"
-                className="bg-orange-500 w-12 text-white rounded-full focus:outline-none appearance-none pl-2 py-1 "
+                className="bg-orange-500 w-12 text-white rounded-full focus:outline-none appearance-none pl-2 py-1"
                 onChange={(e) => handleAssign(e, task._id)}
               >
                 <option value="choose" disabled>
@@ -160,7 +149,7 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
                     <option
                       key={user._id}
                       value={user._id}
-                      disabled={isAssigned(user._id)}
+                      disabled={isUserAssigned(user._id, task)}
                     >
                       {user.username}
                     </option>
