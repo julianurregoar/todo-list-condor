@@ -105,7 +105,7 @@ const TaskCard = ({ task, allUsers, handleDelete }) => {
 
         <div className="w-full lg:w-5/6">
           <div className="inline-block">
-            <p className="text-white text-lg mr-1 mt-1 lg:mt-0 lg:mx-2 lg:mr-0">
+            <p className="text-white text-lg mr-1 mt-1 lg:mt-0 lg:mx-2 lg:mr-1">
               Members:
             </p>
           </div>
