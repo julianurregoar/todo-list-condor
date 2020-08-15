@@ -4,17 +4,21 @@ import { taskReducer } from '../../reducer/taskReducer';
 
 const TaskContext = createContext({
   tasks: [],
+  searchedTasks: [],
   getAllTasks: () => {},
   addTask: (body) => {},
   deleteTask: (taskId) => {},
   editTask: (taskId, body) => {},
   assignUser: (taskId, body) => {},
   unassignUser: (taskId, body) => {},
+  searchTaskByTitle: (body) => {},
+  clearSearch: () => {},
 });
 
 const TaskProvider = (props) => {
   const [state, dispatch] = useReducer(taskReducer, {
     tasks: [],
+    searchedTasks: [],
   });
 
   const token = localStorage.getItem('token');
@@ -31,6 +35,19 @@ const TaskProvider = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const searchTaskByTitle = async (body) => {
+    try {
+      const res = await server.post('/api/task/search', body, config);
+      dispatch({ type: 'SEARCH_TASK', payload: res.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const clearSearch = () => {
+    dispatch({ type: 'CLEAR_SEARCH' });
   };
 
   const addTask = async (body) => {
@@ -90,12 +107,15 @@ const TaskProvider = (props) => {
     <TaskContext.Provider
       value={{
         tasks: state.tasks,
+        searchedTasks: state.searchedTasks,
         getAllTasks,
         addTask,
         deleteTask,
         editTask,
         assignUser,
         unassignUser,
+        searchTaskByTitle,
+        clearSearch,
       }}
     >
       {props.children}
